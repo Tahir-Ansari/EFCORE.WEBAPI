@@ -25,8 +25,9 @@ namespace EFCORE.WEBAPI.Controllers
         {
             _context.Students.Add(student);
             await _context.SaveChangesAsync();
-            return Ok(student.Id);
+            return Ok("Record inserted successfully");
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllStudent()
         {
@@ -40,6 +41,7 @@ namespace EFCORE.WEBAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var student = await _context.Students.Where(a => a.Id == id).FirstOrDefaultAsync();
+            await _context.SaveChangesAsync();
             if (student == null)
                 return NotFound();
             return Ok(student);
@@ -52,6 +54,7 @@ namespace EFCORE.WEBAPI.Controllers
             if (student == null)
                 return NotFound();
             _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
             return Ok("record is deleted");
         }
 
@@ -69,7 +72,6 @@ namespace EFCORE.WEBAPI.Controllers
                 await _context.SaveChangesAsync();
                 return Ok("Update Successfully");
             }
-
         }
     }
 }

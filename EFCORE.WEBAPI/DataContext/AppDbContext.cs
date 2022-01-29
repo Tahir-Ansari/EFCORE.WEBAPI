@@ -14,6 +14,7 @@ namespace EFCORE.WEBAPI.DataContext
         {
         }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
 
         public async Task<int> SaveChanges()
         {
